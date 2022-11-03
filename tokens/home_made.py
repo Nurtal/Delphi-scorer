@@ -51,6 +51,10 @@ def split_sentence(sentence):
         except:
             pass
 
+        #-> remove stupid terms
+        if(elt in ["vr"]):
+            elt_is_cleaned = False
+
         #-> evaluate attribute
         if(elt_is_cleaned):
             cleaned_sentence.append(elt)
@@ -225,7 +229,7 @@ def spot_differences_word(vector):
     ## parameters
     token = "{difference}"
     tagged_vector = []
-    target_list = ["different", "difference"]
+    target_list = ["different", "difference", "other"]
 
     ## clean the vector
     for elt in vector:
@@ -268,7 +272,12 @@ def spot_significant_words(vector):
     ## parameters
     token = "{significant}"
     tagged_vector = []
-    target_list = ["significant", "significative"]
+    target_list = [
+            "significant",
+            "significative",
+            "substantially",
+            "substantial"
+        ]
 
     ## clean the vector
     for elt in vector:
@@ -388,24 +397,283 @@ def spot_negation_words(vector):
 
 
 
-def spot_random():
+
+
+def spot_be_words(vector):
     """
-
     """
+    ## parameters
+    token = "{be}"
+    tagged_vector = []
+    target_list = [
+            "is",
+            "are",
+            "was",
+            "were",
+            "being"
+        ]
 
-def spot_patient():
+    ## clean the vector
+    for elt in vector:
+
+        #-> init attribute
+        add_token = False
+
+        #-> check target list 1
+        if(elt in target_list):
+            add_token = True
+
+        #-> remove "s" if its the last character
+        if(len(elt) > 1):
+            if(elt[-1] == "s"):
+                elt2 = elt[:-1]
+            else:
+                elt2 = elt
+        else:
+            add_token = False
+
+        #-> check target list 2
+        if(elt2 in target_list):
+            add_token = True
+
+        #-> update token
+        if(add_token):
+            tagged_vector.append(token)
+        else:
+            tagged_vector.append(elt)
+
+    ## return cleaned vector
+    return tagged_vector
+
+
+
+def spot_indication_words(vector):
     """
-
     """
+    ## parameters
+    token = "{indication}"
+    tagged_vector = []
+    target_list = [
+            "present",
+            "presented",
+            "indicate",
+            "indicated",
+            "indicating",
+            "presenting",
+            "seem",
+            "show"
+        ]
+
+    ## clean the vector
+    for elt in vector:
+
+        #-> init attribute
+        add_token = False
+
+        #-> check target list 1
+        if(elt in target_list):
+            add_token = True
+
+        #-> remove "s" if its the last character
+        if(len(elt) > 1):
+            if(elt[-1] == "s"):
+                elt2 = elt[:-1]
+            else:
+                elt2 = elt
+        else:
+            add_token = False
+
+        #-> check target list 2
+        if(elt2 in target_list):
+            add_token = True
+
+        #-> update token
+        if(add_token):
+            tagged_vector.append(token)
+        else:
+            tagged_vector.append(elt)
+
+    ## return cleaned vector
+    return tagged_vector
 
 
-def spot_treatment():
+
+def spot_data_words(vector):
     """
-
     """
+    ## parameters
+    token = "{data}"
+    tagged_vector = []
+    target_list = [
+            "data",
+            "variable"
+        ]
+
+    ## clean the vector
+    for elt in vector:
+
+        #-> init attribute
+        add_token = False
+
+        #-> check target list 1
+        if(elt in target_list):
+            add_token = True
+
+        #-> remove "s" if its the last character
+        if(len(elt) > 1):
+            if(elt[-1] == "s"):
+                elt2 = elt[:-1]
+            else:
+                elt2 = elt
+        else:
+            add_token = False
+
+        #-> check target list 2
+        if(elt2 in target_list):
+            add_token = True
+
+        #-> update token
+        if(add_token):
+            tagged_vector.append(token)
+        else:
+            tagged_vector.append(elt)
+
+    ## return cleaned vector
+    return tagged_vector
 
 
 
+def spot_clinical_words(vector):
+    """
+    """
+    ## parameters
+    token = "{clinical}"
+    tagged_vector = []
+    target_list = [
+            "clinical",
+            "trial"
+        ]
+
+    ## clean the vector
+    for elt in vector:
+
+        #-> init attribute
+        add_token = False
+
+        #-> check target list 1
+        if(elt in target_list):
+            add_token = True
+
+        #-> remove "s" if its the last character
+        if(len(elt) > 1):
+            if(elt[-1] == "s"):
+                elt2 = elt[:-1]
+            else:
+                elt2 = elt
+        else:
+            add_token = False
+
+        #-> check target list 2
+        if(elt2 in target_list):
+            add_token = True
+
+        #-> update token
+        if(add_token):
+            tagged_vector.append(token)
+        else:
+            tagged_vector.append(elt)
+
+    ## return cleaned vector
+    return tagged_vector
+
+
+
+
+def spot_demographic_words(vector):
+    """
+    """
+    ## parameters
+    token = "{demographic}"
+    tagged_vector = []
+    target_list = [
+            "demographic",
+            "demographical"
+        ]
+
+    ## clean the vector
+    for elt in vector:
+
+        #-> init attribute
+        add_token = False
+
+        #-> check target list 1
+        if(elt in target_list):
+            add_token = True
+
+        #-> remove "s" if its the last character
+        if(len(elt) > 1):
+            if(elt[-1] == "s"):
+                elt2 = elt[:-1]
+            else:
+                elt2 = elt
+        else:
+            add_token = False
+
+        #-> check target list 2
+        if(elt2 in target_list):
+            add_token = True
+
+        #-> update token
+        if(add_token):
+            tagged_vector.append(token)
+        else:
+            tagged_vector.append(elt)
+
+    ## return cleaned vector
+    return tagged_vector
+
+
+
+def spot_patient_words(vector):
+    """
+    """
+    
+    ## parameters
+    token = "{patient}"
+    tagged_vector = []
+    target_list = ["patient", "case"]
+
+    ## clean the vector
+    for elt in vector:
+
+        #-> init attribute
+        add_token = False
+
+        #-> check target list 1
+        if(elt in target_list):
+            add_token = True
+
+        #-> remove "s" if its the last character
+        if(len(elt) > 1):
+            if(elt[-1] == "s"):
+                elt2 = elt[:-1]
+            else:
+                elt2 = elt
+        else:
+            add_token = False
+
+        #-> check target list 2
+        if(elt2 in target_list):
+            add_token = True
+
+        #-> update token
+        if(add_token):
+            tagged_vector.append(token)
+        else:
+            tagged_vector.append(elt)
+
+    ## return cleaned vector
+    return tagged_vector
 
 
 
@@ -442,7 +710,18 @@ def run():
         sequence = spot_significant_words(sequence)
         sequence = spot_statistic_words(sequence)
         sequence = spot_negation_words(sequence)
-        print(sequence)
+        sequence = spot_indication_words(sequence)
+        sequence = spot_be_words(sequence)
+        sequence = spot_data_words(sequence)
+        sequence = spot_clinical_words(sequence)
+        sequence = spot_demographic_words(sequence)
+        sequence = spot_patient_words(sequence)
+
+
+        # check results
+        for elt in sequence:
+            if(elt[0] != "{" or elt[-1] != "}"):
+                print(elt)
 
 
 run()
